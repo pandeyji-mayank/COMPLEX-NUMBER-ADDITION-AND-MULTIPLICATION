@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+class complex
+{
+     int a, b;
+     static int count;
+public:
+     void setcomplex()
+     {
+          count++;
+          cout << "\nIn the complex number '"<<count<<"' a + ib\nThe value of a is : ";
+          cin >> a;
+          cout << "The value of b is : ";
+          cin >> b;
+     }
+     void addcomplex(complex o1, complex o2)
+     {
+          a = o1.a + o2.a;
+          b = o1.b + o2.b;
+     }
+     void displaycomplex()
+     {
+          cout << "The sum of the complex number is " << a << " + " << b << "i" << endl;
+     }
+     void multiplication(complex o1, complex o2)
+     {
+          a = (o1.a) * (o2.a) - (o1.b) * (o2.b);
+          b = (o2.a) * (o1.b) + (o1.a) * (o2.b);
+     }
+};
+int complex::count;
+int main()
+{
+     int num;
+     char ch;
+     cout << "\nIf you want multiplication operation Enter 'M/m' or if you want addition operation print 'A/a' : ";
+     cin >> ch;
+
+     if (ch == 'a')
+     {
+          cout << "Write the total complex no. you want to add : ";
+          cin >> num;
+          complex numb[num];
+          numb[0].setcomplex();
+
+          for (int i = 1; i < num; i++)
+          {
+               numb[i].setcomplex();
+               numb[i].addcomplex(numb[i - 1], numb[i]);
+          }
+          numb[num - 1].displaycomplex();
+     }
+     else if (ch == 'm')
+     {
+          cout << "Write the total complex no. you want to add : ";
+          cin >> num;
+          complex numb[num];
+          numb[0].setcomplex();
+          for (int i = 1; i < num; i++)
+          {
+               numb[i].setcomplex();
+               numb[i].multiplication(numb[i - 1], numb[i]);
+          }
+          numb[num - 1].displaycomplex();
+     }
+     else
+     {
+          cout << "You have not choose the correct format of 'A/a' ot 'M/m'";
+     }
+     return 0;
+}
